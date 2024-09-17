@@ -1,0 +1,6 @@
+# This is the config used to specify the folders for autoremove-quarantine to watch.
+# You can specify either absolute or relative paths.
+# Relative paths will be relative to the running user's home folder.
+# Lines starting with # will be ignored.
+
+Downloads
