@@ -2,6 +2,7 @@
 extern crate tracing;
 
 mod config;
+mod install;
 
 use anyhow::{Context, Result};
 use crossbeam_channel::unbounded;
@@ -13,6 +14,9 @@ use tracing_unwrap::ResultExt;
 
 fn main() -> Result<()> {
 	setup_logger()?;
+	if install::try_self_install().context("failed to run self-installer")? {
+		return Ok(());
+	}
 	let (tx, rx) = unbounded();
 	let mut watcher = RecommendedWatcher::new(tx, Config::default())
 		.context("failed to setup fs event watcher")
